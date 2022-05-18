@@ -3,9 +3,15 @@ name: Run automated end-to-end tests
 on:
     push:
         branches: [master]
+        paths-ignore:
+            - "scripts/test/native/**"
+            - ".github/workflows/NativeAutomatedTestsAndroid.yml"
 
     pull_request:
         branches: [master]
+        paths-ignore:
+            - "scripts/test/native/**"
+            - ".github/workflows/NativeAutomatedTestsAndroid.yml"
 
 jobs:
     test:
