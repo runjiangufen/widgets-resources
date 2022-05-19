@@ -122,12 +122,7 @@ async function main() {
         console.log("Preheating bundler for Android dev=false minify=true");
         const makeItNativeArguments =
             "?platform=android&dev=false&minify=true&app=com.mendix.developerapp.mx9&modulesOnly=false&runModule=true";
-        await tryReach(
-            "Bundler",
-            () => fetchOrTimeout(`http://localhost:8083/index.bundle${makeItNativeArguments}`),
-            30,
-            60 * 3
-        );
+        await tryReach("Bundler", () => fetchOrTimeout(`http://localhost:8083/index.bundle${makeItNativeArguments}`));
         console.log("Preheating done!");
 
         // Spin up the runtime and run the testProject
@@ -224,8 +219,8 @@ async function fetchUrl(url) {
     return (await fetch(url)).ok;
 }
 
-async function fetchOrTimeout(url) {
-    return await Promise.race([
+function fetchOrTimeout(url) {
+    return Promise.race([
         fetch(url).then(response => {
             if (!response.ok) {
                 throw new HTTPResponseError(response, "from Metro");
