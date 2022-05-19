@@ -12,7 +12,7 @@ on:
 jobs:
     native_automated_tests_android:
         name: "Native automated tests for Android"
-        runs-on: macos-latest
+        runs-on: ubuntu-latest
         permissions:
             packages: read
             contents: read
@@ -45,8 +45,6 @@ jobs:
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
                   node-version: "16"
-            - name: Install docker
-              uses: docker-practice/actions-setup-docker@2d1d86c7fd8177d36a51a328528c79aae2bcb1fe
             - name: Login to GitHub Container Registry
               uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
               with:
