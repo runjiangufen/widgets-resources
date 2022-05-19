@@ -17,7 +17,7 @@ async function main() {
     // todo: there is no FORKED envvar. consider using `external-pull-request`.
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
-    const branch = "githubactions";
+    const branch = "main";
     const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", branch);
     const localRoot = process.cwd();
     const testsDir = join(localRoot, "tests");
