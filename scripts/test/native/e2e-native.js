@@ -125,7 +125,8 @@ async function main() {
         await tryReach(
             "Bundler",
             () => fetchOrTimeout(`http://localhost:8083/index.bundle${makeItNativeArguments}`),
-            200
+            200,
+            5 * 50
         );
         console.log("Preheating done!");
 
