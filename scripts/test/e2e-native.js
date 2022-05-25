@@ -151,11 +151,14 @@ async function main() {
                 const file = (await readFile(join(testProjectDir, "deployment", "log", "packager.txt"))).toString();
                 if (new RegExp(/BUNDLE[\s]+.\/index.js/).test(file)) {
                     break;
+                } else {
+                    console.log("Log line not found! Metro log:");
+                    console.log(file);
                 }
             } catch (e) {
                 console.error(e);
             }
-            console.log(`Log line not found, pausing ${pauseInS} seconds...`);
+            console.log(`Pausing ${pauseInS} seconds...`);
 
             await new Promise(resolve => setTimeout(resolve, pauseInS * 1000));
         }
