@@ -1,4 +1,4 @@
-const { execSync } = require("child_process");
+const { execSync, spawn } = require("child_process");
 const fetch = require("node-fetch");
 const { join } = require("path");
 const { cat, mkdir, rm, mv, cp } = require("shelljs");
@@ -34,25 +34,25 @@ async function main() {
     rm("-fr", repoPath);
     rm("-f", testArchivePath);
 
-    const changedPackages = JSON.parse(process.env.CHANGED_PACKAGES.replaceAll("\n", ""));
-
-    execSync(`npx lerna run release --scope "${process.env.CHANGED_PACKAGES_FORMATTED_FOR_LERNA}"`, {
-        stdio: "inherit"
-    });
-
-    changedPackages.forEach(({ name, location }) => {
-        if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
-            // for js actions
-            const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
-            const jsActionsPath = `${testProjectDir}/javascriptsource/${path}/actions`;
-            rm("-rf", jsActionsPath);
-            cp("-r", `${location}/dist`, jsActionsPath);
-        } else {
-            // for widgets
-            // this is acceptable if there's one built version.
-            cp(`${location}/dist/**/*.mpk`, `${testProjectDir}/widgets`);
-        }
-    });
+    // const changedPackages = JSON.parse(process.env.CHANGED_PACKAGES.replaceAll("\n", ""));
+    //
+    // execSync(`npx lerna run release --scope "${process.env.CHANGED_PACKAGES_FORMATTED_FOR_LERNA}"`, {
+    //     stdio: "inherit"
+    // });
+    //
+    // changedPackages.forEach(({ name, location }) => {
+    //     if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
+    //         // for js actions
+    //         const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
+    //         const jsActionsPath = `${testProjectDir}/javascriptsource/${path}/actions`;
+    //         rm("-rf", jsActionsPath);
+    //         cp("-r", `${location}/dist`, jsActionsPath);
+    //     } else {
+    //         // for widgets
+    //         // this is acceptable if there's one built version.
+    //         cp(`${location}/dist/**/*.mpk`, `${testProjectDir}/widgets`);
+    //     }
+    // });
 
     // When running on CI pull the docker image from Github Container Registry
     if (ghcr) {
@@ -95,30 +95,52 @@ async function main() {
         // Build testProject via mxbuild
         const projectFile = "/source/tests/testProject/NativeComponentsTestProject.mpr";
         mxbuildContainerId = execSync(
-            `docker run -p 8083:8083 -i -td -v ${localRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
+            `docker run -i -td -v ${localRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
         )
             .toString()
             .trim();
 
-        console.log("Updating widgets with mx util...");
-        execSync(
-            `docker exec -t ${mxbuildContainerId} bash -c "mx update-widgets --loose-version-check ${projectFile}"`,
-            {
-                stdio: "inherit"
-            }
-        );
-
-        console.log("Building project with mxbuild...");
-        execSync(`docker exec -t ${mxbuildContainerId} bash -c "mxbuild -o /tmp/automation.mda ${projectFile}"`, {
-            stdio: "inherit"
-        });
+        // console.log("Updating widgets with mx util...");
+        // execSync(
+        //     `docker exec -t ${mxbuildContainerId} bash -c "mx update-widgets --loose-version-check ${projectFile}"`,
+        //     {
+        //         stdio: "inherit"
+        //     }
+        // );
+        //
+        // console.log("Building project with mxbuild...");
+        // execSync(`docker exec -t ${mxbuildContainerId} bash -c "mxbuild -o /tmp/automation.mda ${projectFile}"`, {
+        //     stdio: "inherit"
+        // });
         console.log("All widgets are updated and project .mpr created.");
 
-        console.log("Starting metro...");
-        execSync(
-            `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
-                `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
-                `start --port '8083' --verbose --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
+        // todo: instead of using node inside docker, try running node on the runner for speed
+        // console.log("Starting metro...");
+        // execSync(
+        //     `docker exec -td ${mxbuildContainerId} bash -c "cd /source/tests/testProject/deployment/native && ` +
+        //         `/tmp/mxbuild/modeler/tools/node/node /tmp/mxbuild/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
+        //         `start --port '8083' --verbose --config '/source/tests/testProject/deployment/native/metro.config.json' > /source/tests/testProject/deployment/log/packager.txt"`
+        // );
+
+        // fetch and unzip mxbuild tar
+        // exec node and start metro
+        const tar = await getMxbuild(mendixVersion);
+        const rawfiles = join(localRoot, "mxbuild_files");
+        mkdir("-p", rawfiles);
+        execSync(`tar -xf ${tar} -C ${rawfiles}`);
+        rm("-fr", tar);
+
+        // spawn(
+        //     `node ${rawfiles}/modeler/tools/node/node_modules/react-native/local-cli/cli.js ` +
+        //         `start --port '8083' --verbose --config '${testProjectDir}/deployment/native/metro.config.json' > ${testProjectDir}/deployment/log/packager.txt`,
+        //     { detached: true, stdio: "inherit" }
+        // );
+        spawn(
+            "node",
+            [
+                `${rawfiles}/modeler/tools/node/node_modules/react-native/local-cli/cli.js start --port '8083' --verbose --config '${testProjectDir}/deployment/native/metro.config.json' > ${testProjectDir}/deployment/log/packager.txt`
+            ],
+            { detached: true, stdio: "inherit" }
         );
 
         await tryReach("Metro bundler", () => fetch("http://localhost:8083/status"));
@@ -193,10 +215,6 @@ async function main() {
     } catch (error) {
         console.error(error.message);
 
-        if (error.response) {
-            console.error(await error.response.text());
-        }
-
         try {
             execSync(`cat ${testProjectDir}/deployment/log/packager.txt`, {
                 stdio: "inherit"
@@ -237,6 +255,31 @@ async function getTestProject(repository, branch) {
         rm("-f", downloadedArchivePath);
     }
     throw new Error("Cannot find test project in GitHub repository. Try again later.");
+}
+
+async function getMxbuild(mendixVersion) {
+    // console.log("Downloading test project...");
+    const path = join(tmpdir(), `mxbuild.tar.gz`);
+
+    // if (!repository.includes("github.com")) {
+    //     throw new Error("githubUrl is not a valid github repository!");
+    // }
+
+    try {
+        await promisify(pipeline)(
+            (
+                await fetch(`https://cdn.mendix.com/runtime/mxbuild-${mendixVersion}.tar.gz`)
+            ).body,
+            createWriteStream(path)
+        );
+        console.log("Done!");
+
+        return path;
+    } catch (e) {
+        console.log("fail");
+        rm("-f", path);
+    }
+    // throw new Error("Cannot find test project in GitHub repository. Try again later.");
 }
 
 async function getMendixVersion() {
