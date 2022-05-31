@@ -4,7 +4,7 @@ const { join } = require("path");
 const { cat, mkdir, rm, mv, cp } = require("shelljs");
 const { pipeline } = require("stream");
 const { promisify } = require("util");
-const { createWriteStream, readFileSync, writeFileSync } = require("fs");
+const { createWriteStream, readFileSync, writeFileSync, chownSync, chown, chmodSync } = require("fs");
 const { readFile } = require("fs/promises");
 const { tmpdir } = require("os");
 const { glob } = require("glob");
@@ -359,6 +359,7 @@ async function tryReach(name, request, attempts = 60, pause = 3) {
 
 function findAndReplce(files, search, replace) {
     files.forEach(file => {
+        chmodSync(file, 777);
         const data = readFileSync(file, "utf8");
         const result = data.replace(search, replace);
         writeFileSync(file, result, "utf8");
