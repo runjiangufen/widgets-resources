@@ -96,7 +96,7 @@ async function main() {
         // Build testProject via mxbuild
         const projectFile = "/source/tests/testProject/NativeComponentsTestProject.mpr";
         mxbuildContainerId = execSync(
-            `docker run -i -td -v ${localRoot}:/source -u $(id -u ${USER}):$(id -g ${USER}) --rm ${ghcr}mxbuild:${mendixVersion} bash`
+            `docker run -i -td -v ${localRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
         )
             .toString()
             .trim();
@@ -115,6 +115,7 @@ async function main() {
         });
         console.log("All widgets are updated and project .mpr created.");
 
+        execSync(`sudo chown -R 1001:1001 ${testProjectDir}`);
         // todo: instead of using node inside docker, try running node on the runner for speed
         console.log("Starting metro...");
         // execSync(
