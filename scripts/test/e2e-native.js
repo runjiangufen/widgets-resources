@@ -96,7 +96,7 @@ async function main() {
         // Build testProject via mxbuild
         const projectFile = "/source/tests/testProject/NativeComponentsTestProject.mpr";
         mxbuildContainerId = execSync(
-            `docker run -i -td -v ${localRoot}:/source --rm ${ghcr}mxbuild:${mendixVersion} bash`
+            `docker run -i -td -v ${localRoot}:/source -u $(id -u ${USER}):$(id -g ${USER}) --rm ${ghcr}mxbuild:${mendixVersion} bash`
         )
             .toString()
             .trim();
@@ -359,7 +359,6 @@ async function tryReach(name, request, attempts = 60, pause = 3) {
 
 function findAndReplce(files, search, replace) {
     files.forEach(file => {
-        chmodSync(file, 777);
         const data = readFileSync(file, "utf8");
         const result = data.replace(search, replace);
         writeFileSync(file, result, "utf8");
