@@ -139,7 +139,7 @@ async function main() {
         );
         findAndReplce([`${testProjectDir}/deployment/native/metro.config.json`], /\/tmp/g, localRoot);
 
-        const files = glob.sync(`${testProjectDir}/deployment/native/**/*.js`, { ignore: "**/node_modules/**/*" });
+        const files = glob.sync(`${testProjectDir}/deployment/native/**/*.js`);
         findAndReplce(files, /from "\/source\/tests\/testProject/g, `from "${testProjectDir}`);
         findAndReplce(files, /require\("\/source\/tests\/testProject/g, `require("${testProjectDir}`);
 
