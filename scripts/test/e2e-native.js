@@ -6,6 +6,7 @@ const { pipeline } = require("stream");
 const { promisify } = require("util");
 const { createWriteStream } = require("fs");
 const { tmpdir } = require("os");
+const http = require("http");
 
 main().catch(e => {
     console.error(e);
@@ -120,16 +121,61 @@ async function main() {
 
         await tryReach("Metro bundler", () => fetchUrl("http://localhost:8083/status"));
 
-        console.log("Preheating bundler for Android dev=false minify=true");
         const makeItNativeArguments =
             "?platform=android&dev=false&minify=true&app=com.mendix.developerapp.mx9&modulesOnly=false&runModule=true";
-        await tryReach(
-            "Bundler",
-            () => fetchOrTimeout(`http://localhost:8083/index.bundle${makeItNativeArguments}`),
-            30,
-            60 * 3
-        );
-        console.log("Preheating done!");
+
+        console.log("Preheating bundler for Android dev=false minify=true");
+        await new Promise((resolve, reject) => {
+            request();
+            function request() {
+                const url = `http://localhost:8083/index.bundle${makeItNativeArguments}`;
+                let receivedBytes = 0;
+                let totalBytes = 0;
+                let statusCode;
+
+                http.get(url, response => {
+                    response.setEncoding("utf8");
+                    statusCode = response.statusCode;
+                    totalBytes = response.socket.bytesRead;
+
+                    let body = "";
+
+                    response.on("data", data => {
+                        body += data;
+                        receivedBytes += data.length;
+                        totalBytes = response.socket.bytesRead;
+                        console.log(`on data: received bytes: ${receivedBytes}`);
+                        console.log(`on data: total bytes: ${totalBytes}`);
+                    });
+
+                    response.on("error", error => {
+                        if (error.message.includes("socket hang up")) {
+                            request();
+                        } else {
+                            reject(error);
+                        }
+                    });
+
+                    response.on("end", () => {
+                        console.log("end");
+                        console.log(`on end: received bytes: ${receivedBytes}`);
+                        console.log(`on end: total bytes: ${totalBytes}`);
+
+                        if (statusCode !== 200) {
+                            const json = JSON.parse(body);
+                            if (json.message.includes("Call retries were exceeded")) {
+                                console.log("Ran into non-blocking error, retrying metro request...");
+                                request();
+                            } else {
+                                reject(body);
+                            }
+                        } else {
+                            resolve(body);
+                        }
+                    });
+                });
+            }
+        });
 
         // Spin up the runtime and run the testProject
         runtimeContainerId = execSync(
@@ -177,12 +223,15 @@ async function getTestProject(repository, branch) {
     }
 
     try {
+        console.log(`Downloading Test project on branch ${branch}`);
         await promisify(pipeline)(
             (
                 await fetch(`${repository}/archive/refs/heads/${branch}.zip`)
             ).body,
             createWriteStream(downloadedArchivePath)
         );
+        console.log("Downloaded test project!");
+
         return downloadedArchivePath;
     } catch (e) {
         console.log(`Url is not available :(`);
@@ -225,18 +274,6 @@ async function fetchUrl(url) {
     return (await fetch(url)).ok;
 }
 
-async function fetchOrTimeout(url) {
-    return await Promise.race([
-        fetch(url).then(response => {
-            if (!response.ok) {
-                throw new HTTPResponseError(response, "from Metro");
-            }
-            return true;
-        }),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000))
-    ]);
-}
-
 async function tryReach(name, fn, attempts = 60, pause = 3) {
     for (; attempts > 0; --attempts) {
         try {
@@ -255,11 +292,4 @@ async function tryReach(name, fn, attempts = 60, pause = 3) {
     }
 
     console.log(`${name} is up!`);
-}
-
-class HTTPResponseError extends Error {
-    constructor(response, ...args) {
-        super(`HTTP Response Error: ${response.status} ${response.statusText} ${args.join(" ")}`);
-        this.response = response;
-    }
 }
