@@ -97,6 +97,10 @@ export function ColumnChart({
         }
 
         const Columns = series.map(({ customColumnStyle, dataPoints }, index) => {
+            if (!dataPoints.length) {
+                return null;
+            }
+
             const seriesStyle =
                 style.columns?.customColumnStyles && customColumnStyle
                     ? style.columns.customColumnStyles[customColumnStyle]
