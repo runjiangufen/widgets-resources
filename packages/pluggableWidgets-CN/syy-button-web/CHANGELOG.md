@@ -6,7 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.1.1] - 2022-10-29
+### Fixed
+
+-   Fix the bug that the title of secondary confirmation is invalid
+
+## [1.1.2] - 2022-6-10
+
+### Added
+
+-   Refactoring code
+
+## [1.1.1] - 2022-10-29
 
 ### Added
 
