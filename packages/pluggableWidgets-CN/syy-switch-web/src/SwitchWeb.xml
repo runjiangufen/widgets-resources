@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="runjian.switchweb.SwitchWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>SYY Switch Web</name>
+    <description>Switching Selector.</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <systemProperty key="Label" />
+            <property key="checked" type="attribute">
+                <caption>Checked</caption>
+                <description />
+                <attributeTypes>
+                    <attributeType name="Boolean" />
+                </attributeTypes>
+            </property>
+            <property key="onName" type="string" required="false">
+                <caption>On name</caption>
+                <description>Text displayed when turned on</description>
+            </property>
+            <property key="offName" type="string" required="false">
+                <caption>Off name</caption>
+                <description>Text to display when closed</description>
+            </property>
+            <property key="loadingFlag" type="attribute" required="false">
+                <caption>Loading</caption>
+                <description>Is it loading</description>
+                <attributeTypes>
+                    <attributeType name="Boolean" />
+                </attributeTypes>
+            </property>
+            <property key="disabled" type="attribute" required="false">
+                <caption>Disabled</caption>
+                <description />
+                <attributeTypes>
+                    <attributeType name="Boolean" />
+                </attributeTypes>
+            </property>
+            <property key="size" type="enumeration" defaultValue="default">
+                <caption>Size</caption>
+                <description>Enumeration setting of size</description>
+                <enumerationValues>
+                    <enumerationValue key="default">Default</enumerationValue>
+                    <enumerationValue key="small">Small</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="autoFocus" type="boolean" defaultValue="false">
+                <caption>Auto focus</caption>
+                <description>Component automatically gets focus</description>
+            </property>
+            <property key="onChange" type="action">
+                <caption>OnChange</caption>
+                <description>Callback on change</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Confirm">
+            <property key="openconfirm" type="boolean" defaultValue="false">
+                <caption>Need popup</caption>
+                <description>Enable second confirmation</description>
+            </property>
+            <property key="confirmType" type="enumeration" defaultValue="pop">
+                <caption>Confirm type</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="pop">pop</enumerationValue>
+                    <enumerationValue key="modal">modal</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="ontitle" type="textTemplate" required="false">
+                <caption>On title</caption>
+                <description>Title when turned on</description>
+            </property>
+            <property key="offtitle" type="textTemplate" required="false">
+                <caption>Off title</caption>
+                <description>Title when turned off</description>
+            </property>
+            <property key="confirmokText" type="string" defaultValue="确认">
+                <caption>Confirm text</caption>
+                <description>Confirm button content</description>
+            </property>
+            <property key="confirmcancelText" type="string" defaultValue="取消">
+                <caption>Cancel text</caption>
+                <description>Cancel button content</description>
+            </property>
+            <property key="confirmokType" type="enumeration" defaultValue="primary">
+                <caption>Confirm type</caption>
+                <description>Confirm button type</description>
+                <enumerationValues>
+                    <enumerationValue key="primary">primary</enumerationValue>
+                    <enumerationValue key="ghost">ghost</enumerationValue>
+                    <enumerationValue key="dashed">dashed</enumerationValue>
+                    <enumerationValue key="link">link</enumerationValue>
+                    <enumerationValue key="text">text</enumerationValue>
+                    <enumerationValue key="default">default</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="onConfirm" type="action">
+                <caption>Click confirm</caption>
+                <description />
+            </property>
+            <property key="onCancel" type="action">
+                <caption>Click cancel</caption>
+                <description />
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
