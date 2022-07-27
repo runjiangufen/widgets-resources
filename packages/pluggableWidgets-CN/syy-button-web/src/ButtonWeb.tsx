@@ -2,7 +2,8 @@ import { ReactNode, createElement, useCallback } from "react";
 import { ButtonWebContainerProps } from "../typings/ButtonWebProps";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { checkPathPermission } from "./utils/utils";
-import { PopConpemnet, ButtonConpemnet } from "./components/ButtonWeb";
+import { Button } from "./components/Button";
+
 import "./ui/ButtonWeb.css";
 
 import { Modal } from "antd";
@@ -65,9 +66,8 @@ export function ButtonWeb(props: ButtonWebContainerProps): ReactNode {
     }
     const shapeData = shape === "circle" ? "circle" : shape === "round" ? "round" : undefined;
     const textData = text.trim() === "" ? undefined : text;
-
-    const ButtonWebView = (
-        <ButtonConpemnet
+    return (
+        <Button
             disabled={!!(disabled && disabled.value)}
             danger={danger && danger.value}
             loading={loading && loading.value}
@@ -79,25 +79,13 @@ export function ButtonWeb(props: ButtonWebContainerProps): ReactNode {
             type={type}
             onClick={onClick}
             icon={icon?.value}
+            openconfirm={openconfirm}
+            confirmokType={confirmokType}
+            confirmtitle={confirmtitle?.value}
+            confirmokText={confirmokText}
+            confirmcancelText={confirmcancelText}
         >
             {textData}
-        </ButtonConpemnet>
-    );
-
-    return (
-        <div className={props.class} style={props.style} tabIndex={props.tabIndex}>
-            {openconfirm && confirmType === "pop" ? (
-                <PopConpemnet
-                    confirmtitle={confirmtitle}
-                    confirmokText={confirmokText}
-                    confirmcancelText={confirmcancelText}
-                    confirmokType={confirmokType}
-                >
-                    {ButtonWebView}
-                </PopConpemnet>
-            ) : (
-                ButtonWebView
-            )}
-        </div>
+        </Button>
     );
 }
