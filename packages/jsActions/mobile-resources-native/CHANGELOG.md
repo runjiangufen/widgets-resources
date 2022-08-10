@@ -6,6 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.10.0] Native Mobile Resources - 2022-7-11
+
+## [2.0.0] BackgroundGradient
+
+### Breaking
+
+-   We added Atlas styling support for this widget. Regarding this change, you should update your [Background gradient] widgets' design properties. Please visit the [Mendix Docs](https://docs.mendix.com/refguide/mobile/designing-mobile-user-interfaces/widget-styling-guide/#1131-background-gradient) for more information on customization via Atlas.
+
+## [3.9.1] Native Mobile Resources - 2022-6-16
+
+## [2.2.1] BarChart
+
+### Fixed
+
+-   Update structure mode.
+-   Update sort description.
+
+## [2.2.1] Carousel
+
+### Changed
+
+-   Improved testability of widget
+
+## [1.0.0] ColumnChart
+
+### Added
+
+-   Create this widget.
+
+## [3.2.1] IntroScreen
+
+### Fixed
+
+-   Fixed a bug where the `On slide change` event did not always fire when swiping slides.
+
 ## [3.8.0] Native Mobile Resources - 2022-4-13
 
 ## [1.0.0] BackgroundGradient

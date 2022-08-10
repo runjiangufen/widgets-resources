@@ -31,7 +31,8 @@ import {
     VariablesTabContainer,
     VariablesCheckbox,
     VariablesRadioButtons,
-    VariableBackgroundGradient
+    VariableBackgroundGradient,
+    VariablesColumnChart
 } from "./types/variables";
 //
 //
@@ -707,10 +708,91 @@ radioButtons = merge(radioButtons, custom.radioButtons || ({} as any));
 //
 // Background Gradient
 let backgroundGradient: VariableBackgroundGradient = {
-    container: {}
+    container: {},
+    angle: 0,
+    opacity: 100
 };
 
 backgroundGradient = merge(backgroundGradient, custom.backgroundGradient || ({} as any));
+
+// column chart styles
+let columnChart: VariablesColumnChart = {
+    container: {},
+    errorMessage: {
+        fontFamily: font.family,
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightNormal
+    },
+    chart: {},
+    grid: {
+        lineColor: border.color
+    },
+    xAxis: {
+        color: font.colorTitle,
+        fontFamily: font.family,
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightNormal,
+        label: {
+            color: font.colorParagraph,
+            alignSelf: "center",
+            marginHorizontal: 0,
+            marginVertical: 8,
+            fontFamily: font.family,
+            fontSize: font.sizeSmall,
+            fontWeight: font.weightNormal
+        },
+        lineColor: border.color
+    },
+    yAxis: {
+        color: font.colorTitle,
+        fontFamily: font.family,
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightNormal,
+        label: {
+            color: font.colorParagraph,
+            marginHorizontal: 0,
+            marginVertical: 8,
+            fontFamily: font.family,
+            fontSize: font.sizeSmall,
+            fontWeight: font.weightNormal
+        },
+        lineColor: border.color
+    },
+    columns: {
+        columnColorPalette: Object.entries(brand)
+            .reduce((accumulator, [key, value]) => (key.endsWith("Light") ? accumulator : [...accumulator, value]), [])
+            .join(";"),
+        columnsOffset: 20,
+        customColumnStyles: {
+            your_static_or_dynamic_attribute_value: {
+                column: {},
+                label: {}
+            }
+        }
+    },
+    legend: {
+        container: {
+            justifyContent: "flex-start",
+            marginHorizontal: 0,
+            marginVertical: spacing.small
+        },
+        item: {
+            padding: 0,
+            paddingRight: spacing.regular
+        },
+        indicator: {
+            marginRight: spacing.small
+        },
+        label: {
+            color: font.colorTitle,
+            fontFamily: font.family,
+            fontSize: font.sizeSmall,
+            fontWeight: font.weightNormal
+        }
+    }
+};
+
+columnChart = merge(columnChart, custom.columnChart || ({} as any));
 
 export * from "../../../theme/native/custom-variables";
 export {
@@ -741,5 +823,6 @@ export {
     slider,
     rating,
     radioButtons,
-    backgroundGradient
+    backgroundGradient,
+    columnChart
 };
