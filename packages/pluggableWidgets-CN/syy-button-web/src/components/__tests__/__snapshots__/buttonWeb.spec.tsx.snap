@@ -194,23 +194,6 @@ exports[`ButtonWeb compact dialog used for asking for user confirmation 1`] = `
 </div>
 `;
 
-exports[`ButtonWeb compact dialog used for asking for user confirmation triggers onClick 1`] = `
-<div>
-  <button
-    class="ant-btn ant-btn-default"
-    type="button"
-  >
-    <span
-      aria-hidden="true"
-      class="glyphicon rating-icon rating-icon-empty icon-class"
-    />
-    <span>
-      Button
-    </span>
-  </button>
-</div>
-`;
-
 exports[`ButtonWeb modal dialog used for asking for user confirmation 1`] = `
 <div>
   <button
