@@ -16,6 +16,10 @@
     "minimumMXVersion": "9.6.0",
     "marketplaceId": 118796
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "heatmap-chart-web"
+  },
   "config": {
     "projectPath": "D:\\work\\antd-web-docs-main",
     "mendixHost": "http://localhost:8080",
