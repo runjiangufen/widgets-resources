@@ -67,25 +67,30 @@ export function ButtonWeb(props: ButtonWebContainerProps): ReactNode {
     const shapeData = shape === "circle" ? "circle" : shape === "round" ? "round" : undefined;
     const textData = text.trim() === "" ? undefined : text;
     return (
-        <Button
-            disabled={!!(disabled && disabled.value)}
-            danger={danger && danger.value}
-            loading={loading && loading.value}
-            ghost={ghost}
-            block={block}
-            href={href ? href : undefined}
-            size={size}
-            shape={shapeData}
-            type={type}
-            onClick={onClick}
-            icon={icon?.value}
-            openconfirm={openconfirm}
-            confirmokType={confirmokType}
-            confirmtitle={confirmtitle?.value}
-            confirmokText={confirmokText}
-            confirmcancelText={confirmcancelText}
-        >
-            {textData}
-        </Button>
+        <div className={props.class} style={props.style} tabIndex={props.tabIndex}>
+            <Button
+                disabled={!!(disabled && disabled.value)}
+                danger={danger && danger.value}
+                loading={loading && loading.value}
+                ghost={ghost}
+                block={block}
+                href={href ? href : undefined}
+                size={size}
+                shape={shapeData}
+                type={type}
+                onClick={onClick}
+                icon={icon?.value}
+                openconfirm={openconfirm}
+                confirmType={confirmType}
+                confirmokType={confirmokType}
+                confirmtitle={confirmtitle?.value}
+                confirmokText={confirmokText}
+                confirmcancelText={confirmcancelText}
+                onConfirm={onConfirm}
+                onCancel={onCancel}
+            >
+                {textData}
+            </Button>
+        </div>
     );
 }

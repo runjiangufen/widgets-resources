@@ -5,77 +5,76 @@
 // check out the link below and learn how to write your first test:
 // https://on.cypress.io/writing-first-test
 
-describe("Accordion", () => {
-    const browserName = Cypress.browser.name;
+describe("Button", () => {
+    // const browserName = Cypress.browser.name;
 
     beforeEach(() => {
-        cy.visit("/p/button"); // resets page
+        cy.visit("/"); // resets page
     });
-    it("compares with a screenshot baseline and checks if all accordion elements are rendered as expected", () => {
+    it("displays Button items by button types", () => {
         cy.wait(2000);
-        const accordionGroup = ".mx-name-accordion1 > section:nth-child(3)";
-        cy.get(accordionGroup).contains("Success (custom header)");
+        cy.get(".mx-name-container4 .ant-btn-primary").should("be.visible").find("span").contains("Primary Button");
+        cy.get(".mx-name-container4 .ant-btn-default").should("be.visible").find("span").contains("Default Button");
+        cy.get(".mx-name-container4 .ant-btn-dashed").should("be.visible").find("span").contains("Dashed Button");
+        cy.get(".mx-name-container4 .ant-btn-text").should("be.visible").find("span").contains("Text Button");
+        cy.get(".mx-name-container4 .ant-btn-link").should("be.visible").find("span").contains("Link Button");
     });
 
-    // it("hides group when the visibility is false", () => {
-    //     const accordionGroup = ".mx-name-accordion1 > section:nth-child(3)";
-    //     const button = ".mx-name-actionButton1";
+    it("displays Button with icons", () => {
+        cy.wait(2000);
+        cy.get(".mx-name-container37 .ant-btn-primary")
+            .should("be.visible")
+            .find("span")
+            .eq(0)
+            .should("have.class", "rating-icon");
+    });
 
-    //     cy.get(accordionGroup).contains("Secondary");
-    //     cy.get(button).click();
-    //     cy.get(accordionGroup).contains("Success (custom header)");
-    // });
+    it("display different sizes of buttons", () => {
+        cy.wait(2000);
+        cy.get(".mx-name-container43 .ant-btn-sm").should("have.length", 1);
+        cy.get(".mx-name-container43 .ant-btn-lg").should("have.length", 1);
+    });
 
-    // it("shows first group content", () => {
+    it("A button that displays the loading status", () => {
+        cy.wait(2000);
+        //  Use custom class
+        cy.get(".cy-test-loading-1 button")
+            .should("have.not.class", "ant-btn-loading")
+            .click()
+            .should("have.class", "ant-btn-loading");
+        cy.get(".cy-test-loading-2 button").should("have.class", "ant-btn-loading");
+        cy.get(".cy-test-loading-3 button").should("have.class", "ant-btn-loading");
+        cy.get(".cy-test-loading-4 button").should("have.class", "ant-btn-loading");
+    });
 
-    //     const accordionGroup = ".mx-name-accordion1 > section";
-    //     const accordionGroupContent = ".mx-name-text5";
+    it("A button that displays the disabled status", () => {
+        cy.wait(2000);
+        cy.get(".mx-name-container47 .ant-btn-primary").should("be.disabled");
+        cy.get(".mx-name-container47 .ant-btn-default").should("be.disabled");
+        cy.get(".mx-name-container47 .ant-btn-dashed").should("be.disabled");
+        cy.get(".mx-name-container47 .ant-btn-text").should("be.disabled");
+        cy.get(".mx-name-container47 .ant-btn-link").should("be.disabled");
+    });
 
-    //     cy.get(accordionGroup).find(accordionGroupContent).should("not.be.visible");
-    //     cy.get(accordionGroup).first().click();
-    //     cy.get(accordionGroup).find(accordionGroupContent).should("be.visible");
-    // });
-    // it("shows one image in the group content", () => {
-    //     const accordionGroup = ".mx-name-accordion1 > section:nth-child(2)";
-    //     const accordionGroupContent = ".mx-name-image1";
-
-    //     cy.get(accordionGroup).find(accordionGroupContent).should("not.be.visible");
-    //     cy.get(accordionGroup).click();
-    //     cy.get(accordionGroup).find(accordionGroupContent).should("be.visible");
-    // });
-    // it("shows single accordion expanded at a time", () => {
-    //     const firstAccordionGroup = ".mx-name-accordion1 > section";
-    //     const firstAccordionGroupContent = ".mx-name-text5";
-    //     const secondAccordionGroup = ".mx-name-accordion1 > section:nth-child(2)";
-    //     const secondAccordionGroupContent = ".mx-name-image1";
-    //     const thirdAccordionGroup = ".mx-name-accordion1 > section:nth-child(3)";
-    //     const thirdAccordionGroupContent = ".mx-name-image2";
-
-    //     cy.get(firstAccordionGroup).find(firstAccordionGroupContent).should("not.be.visible");
-    //     cy.get(secondAccordionGroup).find(secondAccordionGroupContent).should("not.be.visible");
-    //     cy.get(thirdAccordionGroup).find(thirdAccordionGroupContent).should("not.be.visible");
-    //     cy.get(firstAccordionGroup).first().click();
-    //     cy.get(firstAccordionGroup).find(firstAccordionGroupContent).should("be.visible");
-    //     cy.get(secondAccordionGroup).find(secondAccordionGroupContent).should("not.be.visible");
-    //     cy.get(thirdAccordionGroup).find(thirdAccordionGroupContent).should("not.be.visible");
-    //     cy.get(thirdAccordionGroup).first().click();
-    //     cy.get(firstAccordionGroup).find(firstAccordionGroupContent).should("not.be.visible");
-    //     cy.get(secondAccordionGroup).find(secondAccordionGroupContent).should("not.be.visible");
-    //     cy.get(thirdAccordionGroup).find(thirdAccordionGroupContent).should("be.visible");
-    // });
-    // it("shows multiple accordions expanded", () => {
-    //     const accordionGroup = ".mx-name-accordion2 > section";
-    //     const accordionGroupContent = ".mx-name-accordion3";
-
-    //     cy.get(accordionGroup).find(accordionGroupContent).should("not.be.visible");
-    //     cy.get(accordionGroup).first().click();
-    //     cy.get(accordionGroup).find(accordionGroupContent).should("be.visible");
-
-    //     const secondAccordionGroup = ".mx-name-accordion3 > section";
-    //     const secondAccordionGroupContent = ".mx-name-text6";
-
-    //     cy.get(secondAccordionGroup).find(secondAccordionGroupContent).should("not.be.visible");
-    //     cy.get(secondAccordionGroup).first().click();
-    //     cy.get(secondAccordionGroup).find(secondAccordionGroupContent).should("be.visible");
-    // });
+    it("A button that displays the danger status", () => {
+        cy.wait(2000);
+        cy.get(".mx-name-container22 .ant-btn-primary").should("have.class", "ant-btn-dangerous");
+        cy.get(".mx-name-container22 .ant-btn-default").should("have.class", "ant-btn-dangerous");
+        cy.get(".mx-name-container22 .ant-btn-dashed").should("have.class", "ant-btn-dangerous");
+        cy.get(".mx-name-container22 .ant-btn-text").should("have.class", "ant-btn-dangerous");
+        cy.get(".mx-name-container22 .ant-btn-link").should("have.class", "ant-btn-dangerous");
+    });
+    it("A button that displays the ghost status", () => {
+        cy.wait(2000);
+        cy.get(".mx-name-container17 .ant-btn-primary").should("have.class", "ant-btn-background-ghost");
+        cy.get(".mx-name-container17 .ant-btn-default").should("have.class", "ant-btn-background-ghost");
+        cy.get(".mx-name-container17 .ant-btn-dashed").should("have.class", "ant-btn-background-ghost");
+    });
+    it("A button that displays the Block status", () => {
+        cy.wait(2000);
+        cy.get(".mx-name-container28 .ant-btn-primary").should("have.class", "ant-btn-block");
+        cy.get(".mx-name-container28 .ant-btn-default").should("have.class", "ant-btn-block");
+        cy.get(".mx-name-container28 .ant-btn-dashed").should("have.class", "ant-btn-block");
+        cy.get(".mx-name-container28 .ant-btn-link").should("have.class", "ant-btn-block");
+    });
 });

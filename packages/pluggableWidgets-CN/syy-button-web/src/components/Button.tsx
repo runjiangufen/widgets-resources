@@ -26,6 +26,8 @@ export function Button(props: ButtonWebProps): ReactElement {
         confirmtitle,
         confirmokText,
         onClick,
+        onConfirm,
+        onCancel,
         confirmcancelText,
         confirmokType
     } = props;
@@ -47,7 +49,6 @@ export function Button(props: ButtonWebProps): ReactElement {
             {children}
         </ButtonConpemnet>
     );
-
     return (
         <div>
             {openconfirm && confirmType === "pop" ? (
@@ -56,6 +57,8 @@ export function Button(props: ButtonWebProps): ReactElement {
                     confirmokText={confirmokText}
                     confirmcancelText={confirmcancelText}
                     confirmokType={confirmokType}
+                    onConfirm={onConfirm}
+                    onCancel={onCancel}
                 >
                     {ButtonWebView}
                 </PopConpemnet>
