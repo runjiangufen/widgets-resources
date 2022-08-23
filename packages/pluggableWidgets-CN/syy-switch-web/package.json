@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "My widget description",
   "copyright": "2022 Mendix Technology BV",
-  "author": "songzhengxu",
+  "author": "hepeishan",
   "engines": {
     "node": ">=12"
   },
@@ -15,6 +15,10 @@
   "marketplace": {
     "minimumMXVersion": "9.6.0",
     "marketplaceId": 118796
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/HOPUISHAN/testProjects.git",
+    "branchName": "syy-switch-web"
   },
   "config": {
     "projectPath": "E:\\Mendix\\antd-web-docs-develop_hepeishan",
@@ -39,6 +43,7 @@
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
     "cross-env": "^7.0.2",
+    "cypress": "^9.6.1",
     "eslint": "^7.20.0"
   },
   "dependencies": {

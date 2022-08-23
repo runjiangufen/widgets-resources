@@ -1,12 +1,15 @@
 import { ReactElement, createElement } from "react";
-import { Switch } from "antd";
 import { SwitchWebPreviewProps } from "../typings/SwitchWebProps";
 // import { Icon } from "./components/Icon";
 
 declare function require(name: string): string;
 
 export function preview(_props: SwitchWebPreviewProps): ReactElement {
-    return <Switch className="switch-preview" id="switch-preview" checked />;
+    return (
+        <label className="switch">
+            <div className="switch-container switch-container-checked"></div>
+        </label>
+    );
 }
 
 export function getPreviewCss(): string {
