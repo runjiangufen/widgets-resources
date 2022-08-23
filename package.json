@@ -36,7 +36,6 @@
     "release:native": "npm run release -- --scope '*-native'",
     "release:web": "npm run release -- --scope '*-web'",
     "release-github:widget": "node ./scripts/release/createWidgetRelease.js",
-    "release-github:widget:ts": "ts-node --project ./scripts/tsconfig.json ./scripts/release/createWidgetReleaseV2.ts",
     "release:pwt:ts": "ts-node --project ./scripts/tsconfig.json ./scripts/release/createPWTRelease.ts",
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "create-modules:web": "node ./scripts/release/createWebModules.js",
@@ -54,7 +53,7 @@
     "@commitlint/config-conventional": "^15.0.0",
     "@commitlint/config-lerna-scopes": "^15.0.0",
     "@testing-library/react-native": "^7.2.0",
-    "@types/big.js": "^6.0.0",
+    "@types/big.js": "^6.0.2",
     "@types/concurrently": "^6.3.0",
     "@types/enzyme": "^3.10.8",
     "@types/jasmine": "^3.6.0",
@@ -71,12 +70,12 @@
     "@types/xml2js": "^0.4.5",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
-    "detox": "^19.5.7",
+    "detox": "^19.7.1",
     "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "image-js": "^0.33.0",
     "jest-canvas-mock": "^2.3.0",
-    "jest-image-snapshot": "^4.5.1",
+    "jest-image-snapshot": "^5.1.0",
     "lerna": "^4.0.0",
     "lerna-parallelism": "^0.3.0",
     "lint-staged": "^10.5.0",
@@ -93,11 +92,12 @@
     ]
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "overrides": {
     "@testing-library/react-native": {
-      "react-test-renderer": "17.0.2"
+      "react-test-renderer": "17.0.2",
+      "react-native": "0.68.2"
     },
     "react-native": {
       "use-subscription": "1.5.1"

@@ -6,7 +6,45 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Breaking
+
+-   We removed next actions: SetCookie, ReadCookie, SetFavicon, ScrollToClass.
+
+## [2.5.0] Nanoflow Commons - 2022-7-25
+
+### Added
+
+-   We introduced a new set of actions:
+    -   AddMilliseconds
+    -   AddTime
+    -   Base64Decode
+    -   Base64DecodeToImage
+    -   Base64Encode
+    -   ClearLocalStorage
+    -   FindObjectWithGUID
+    -   GetCurrentLocation
+    -   GetRemoteUrl
+    -   GetStraightLineDistance
+    -   IsConnected
+    -   ReadCookie
+    -   ScrollToClass
+    -   SetCookie
+    -   SetFavicon
+    -   TimeBetween
+
+## [2.4.0] Nanoflow Commons - 2022-6-28
+
+### Added
+
+-   We introduced a new [Clear cached session data] action to clear the cached session data from local storage.
+-   We introdcued a new [Reload] action that reloads the app.
+
+### Breaking
+
+-   [Clear cached session data] action would only be compatible with Mendix client `9.14` or above.
+
 ## [2.3.1] Nanoflow Commons - 2022-3-22
+
 ### Fixed
 
 -   Reduce module size by removing unused dependencies. This should speed up interaction with Team Server.

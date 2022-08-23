@@ -1,6 +1,6 @@
 {
   "name": "nanoflow-actions-web",
-  "version": "2.2.0",
+  "version": "2.4.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -19,6 +19,6 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=9.0.3",
     "rimraf": "^2.7.1",
-    "rollup": "~2.66.1"
+    "rollup": "^2.68.0"
   }
 }

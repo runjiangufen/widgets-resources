@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.13.3] - 2022-08-15
+
+### Added
+
+-   We added set of helpers for conditional visibility of properties.
+
+## [9.13.2] - 2022-06-29
+
+### Changed
+
+-   We updated required Node.js version to the current LTS version.
+
+-   Update `rollup` and `@rollup/plugin-commonjs`
+
 ## [9.13.1] - 2022-05-23
 
 ### Fixed

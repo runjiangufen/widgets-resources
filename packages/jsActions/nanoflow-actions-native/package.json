@@ -1,7 +1,7 @@
 {
   "name": "nanoflow-actions-native",
   "moduleName": "Nanoflow Commons",
-  "version": "2.3.1",
+  "version": "2.6.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
@@ -27,11 +27,12 @@
     "@react-native-community/geolocation": "2.0.2",
     "react-native-geocoder": "0.5.0",
     "react-native-geolocation-service": "5.2.0",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "js-base64": "~3.7.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "eslint": "^7.20.0",
-    "rollup": "~2.66.1"
+    "rollup": "^2.68.0"
   }
 }
