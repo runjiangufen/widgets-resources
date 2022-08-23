@@ -4,8 +4,6 @@ Demo URL [Demo URL](https://mendix-ui.runjian.com/p/switch)
 
 Github Code [Code URL](https://github.com/runjiangufen/widgets-resources)
 
-本控件基于 Ant Design 进行封装, 皆在打造一套基于 antd 设计的 Mendix 控件
-
 # Switch
 
 Switching Selector.
@@ -17,13 +15,13 @@ If you need to represent the switching between two states or on-off state.
 
 The difference between Switch and Checkbox is that Switch will trigger a state change directly when you toggle it, while Checkbox is generally used for state marking, which should work in conjunction with submit operation.
 
-## 样式引入 Import style sheet
+## Import style sheet
 
 Please see [Configure Your Theme](https://docs.mendix.com/howto/front-end/configuring-your-theme) in the mendix documentation for how to import antd css.
 
-antd css 通过外链 cdn 的方式 在 mendix 的 项目中引入
+antd css can use the style of cdn import to mendix
 
-具体方式为
+example
 
 ```
 {
