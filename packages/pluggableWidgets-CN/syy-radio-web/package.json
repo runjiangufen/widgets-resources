@@ -8,6 +8,18 @@
   "engines": {
     "node": ">=12"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/runjiangufen/widgets-resources.git"
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.6.0",
+    "marketplaceId": 118796
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/runjiangufen/testProjects",
+    "branchName": "syy-button-web"
+  },
   "config": {
     "projectPath": "C:\\runjian\\test\\test-project",
     "mendixHost": "http://localhost:8080",
