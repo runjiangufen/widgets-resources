@@ -3,7 +3,6 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, ListValue, ListAttributeValue } from "mendix";
 import { Big } from "big.js";
 
@@ -31,9 +30,8 @@ export interface StaticDataPreviewType {
 
 export interface RadioWebContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     datasType: DatasTypeEnum;
     staticData: StaticDataType[];
     data?: ListValue;
@@ -53,9 +51,6 @@ export interface RadioWebContainerProps {
 }
 
 export interface RadioWebPreviewProps {
-    className: string;
-    style: string;
-    styleObject?: CSSProperties;
     readOnly: boolean;
     datasType: DatasTypeEnum;
     staticData: StaticDataPreviewType[];

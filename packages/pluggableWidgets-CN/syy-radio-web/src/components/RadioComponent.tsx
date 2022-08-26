@@ -7,19 +7,7 @@ export interface RadioProps extends RadioGroupProps {
 }
 
 export const RadioComponent = (props: RadioProps): ReactElement => {
-    const {
-        size,
-        buttonStyle,
-        disabled,
-        name,
-        optionType,
-        className,
-        style,
-        onChange,
-        direction,
-        options,
-        defaultValue
-    } = props;
+    const { size, buttonStyle, disabled, name, optionType, onChange, direction, options, defaultValue } = props;
 
     const TAGS = optionType === "button" ? Radio.Button : Radio;
     return (
@@ -29,8 +17,6 @@ export const RadioComponent = (props: RadioProps): ReactElement => {
             disabled={disabled}
             name={name}
             optionType={optionType}
-            className={className}
-            style={style}
             onChange={onChange}
             defaultValue={defaultValue}
         >

@@ -11,8 +11,7 @@ export function generateClientTypes(
         return properties.find(p => p.$.key === key);
     }
 
-    let isLabeled = systemProperties.some(p => p.$.key === "Label");
-    isLabeled = false;
+    const isLabeled = systemProperties.some(p => p.$.key === "Label");
     const results = Array.of<string>();
     results.push(
         isNative

@@ -1,4 +1,4 @@
-import { hidePropertiesIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
 import { RadioWebPreviewProps } from "../typings/RadioWebProps";
 
 export function getProperties(

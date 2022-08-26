@@ -2,7 +2,8 @@ import { ReactNode, createElement, useMemo, useCallback } from "react";
 import { RadioWebContainerProps } from "../typings/RadioWebProps";
 import "./ui/index.css";
 import { RadioChangeEvent } from "antd";
-import { updateAttributeValue, executeAction } from "@mendix/piw-utils-internal";
+import { executeAction } from "@mendix/piw-utils-internal";
+import { updateAttributeValue } from "@mendix/syy-utils-internal";
 import { RadioComponent } from "./components/RadioComponent";
 
 export function RadioWeb(props: RadioWebContainerProps): ReactNode {
@@ -96,8 +97,6 @@ export function RadioWeb(props: RadioWebContainerProps): ReactNode {
                 disabled={disabled && disabled.value}
                 name={radioName}
                 optionType={optionType}
-                className={props.class}
-                style={props.style}
                 onChange={handleRadioChange}
                 direction={direction}
                 options={dataOption}
