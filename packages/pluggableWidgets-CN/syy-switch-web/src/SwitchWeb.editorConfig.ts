@@ -1,16 +1,5 @@
 import { SwitchWebPreviewProps } from "../typings/SwitchWebProps";
-import {
-    // changePropertyIn,
-    // ContainerProps,
-    // DropZoneProps,
-    // hideNestedPropertiesIn,
-    hidePropertiesIn,
-    // hidePropertyIn,
-    // Problem,
-    Properties,
-    // RowLayoutProps,
-    transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, Properties, transformGroupsIntoTabs } from "@mendix/pluggable-widgets-tools";
 
 export function getProperties(
     values: SwitchWebPreviewProps,
