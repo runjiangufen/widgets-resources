@@ -13,11 +13,10 @@
     "url": "https://github.com/runjiangufen/widgets-resources.git"
   },
   "marketplace": {
-    "minimumMXVersion": "9.6.0",
-    "marketplaceId": 118796
+    "minimumMXVersion": "9.6.0"
   },
   "testProject": {
-    "githubUrl": "https://github.com/HOPUISHAN/testProjects.git",
+    "githubUrl": "https://github.com/runjiangufen/testProjects.git",
     "branchName": "syy-switch-web"
   },
   "config": {
