@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="runjian.rateweb.RateWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>SYY Rate Web</name>
+    <description>The scoring component.</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <systemProperty key="Label" />
+            <property key="value" type="attribute">
+                <caption>Value</caption>
+                <description>Input box content</description>
+                <attributeTypes>
+                    <attributeType name="Decimal" />
+                    <attributeType name="Integer" />
+                </attributeTypes>
+            </property>
+            <property key="allowClear" type="boolean" defaultValue="false">
+                <caption>AllowClear</caption>
+                <description>Whether to allow to clear after clicking again</description>
+            </property>
+            <property key="allowHalf" type="boolean" defaultValue="false">
+                <caption>AllowHalf</caption>
+                <description>Whether half selection is allowed</description>
+            </property>
+            <!-- <property key="autoFocus" type="boolean" defaultValue="false">
+                <caption>AutoFocus</caption>
+                <description>Automatic focus acquisition</description>
+            </property> -->
+            <property key="count" type="integer" defaultValue="5">
+                <caption>Count</caption>
+                <description>The maximum length</description>
+            </property>
+            <property key="disabled" type="expression" defaultValue="false">
+                <caption>Disabled</caption>
+                <description>Button failure state</description>
+                <returnType type="Boolean" />
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChange" type="action">
+                <caption>OnChange</caption>
+                <description>Callback on click</description>
+            </property>
+            <property key="customWidgetOnChangeValidate" type="boolean" defaultValue="true">
+                <caption>The Change event triggers validation</caption>
+                <description />
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
