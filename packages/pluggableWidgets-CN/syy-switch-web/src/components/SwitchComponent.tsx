@@ -1,5 +1,5 @@
 import { ReactElement, createElement } from "react";
-import { Switch, SwitchProps } from "antd";
+import Switch, { SwitchProps } from "antd/lib/switch";
 
 export interface SwitchComponentProps extends SwitchProps {
     loadingFlag: boolean;

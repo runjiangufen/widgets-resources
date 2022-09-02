@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import { SwitchWebContainerProps } from "../typings/SwitchWebProps";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Modal } from "antd";
+import Modal from "antd/lib/modal";
 import { Switch } from "./components/Switch";
 import "./ui/SwitchWeb.css";
 

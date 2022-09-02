@@ -1,5 +1,5 @@
 import { ReactNode, ReactElement, createElement, MouseEvent } from "react";
-import { Popconfirm } from "antd";
+import Popconfirm from "antd/lib/popconfirm";
 import { ConfirmokTypeEnum } from "../../typings/SwitchWebProps";
 
 export interface PopComponentProps {
