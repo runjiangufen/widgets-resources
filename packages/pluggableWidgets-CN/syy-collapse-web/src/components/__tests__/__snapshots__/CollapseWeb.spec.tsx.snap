@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollapseWeb Set the bordered of collapseWeb 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb Set the class of collapseWeb 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless syy-collapse testClass"
+/>
+`;
+
+exports[`CollapseWeb Set the collapsible of collapseWeb to disabled 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb Set the collapsible of collapseWeb to end 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-end ant-collapse-borderless syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb Set the collapsible of collapseWeb to header 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb Set the collapsible of collapseWeb to start 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb Set the ghost of collapseWeb 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless ant-collapse-ghost syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb renders default collapseWeb 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless syy-collapse "
+/>
+`;
+
+exports[`CollapseWeb renders default collapseWeb and panel 1`] = `
+<div
+  class="ant-collapse ant-collapse-icon-position-start ant-collapse-borderless syy-collapse "
+>
+  <div
+    class="ant-collapse-item ant-collapse-no-arrow"
+  >
+    <div
+      aria-disabled="false"
+      aria-expanded="false"
+      class="ant-collapse-header ant-collapse-header-collapsible-only"
+    >
+      <span
+        class="ant-collapse-header-text"
+      >
+        title1
+      </span>
+    </div>
+  </div>
+  <div
+    class="ant-collapse-item ant-collapse-no-arrow"
+  >
+    <div
+      aria-disabled="false"
+      aria-expanded="false"
+      class="ant-collapse-header ant-collapse-header-collapsible-only"
+    >
+      <span
+        class="ant-collapse-header-text"
+      >
+        title2
+      </span>
+    </div>
+  </div>
+</div>
+`;

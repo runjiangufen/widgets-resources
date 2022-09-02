@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="runjian.panelweb.PanelWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>SYY PanelWeb Web</name>
+    <description>The expanded content area.</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="children" type="widgets" required="false">
+                <caption>Children</caption>
+                <description>children</description>
+            </property>
+            <property key="key" type="string" required="false">
+                <caption>Key</caption>
+                <description>Corresponding activeKey</description>
+            </property>
+            <property key="collapsible" type="enumeration" defaultValue="undefined">
+                <caption>Collapsible</caption>
+                <description>Whether all subpanels are collapsible or specify collapsible trigger areas</description>
+                <enumerationValues>
+                    <enumerationValue key="header">header</enumerationValue>
+                    <enumerationValue key="disabled">disabled</enumerationValue>
+                    <enumerationValue key="undefined">default</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="extra" type="widgets" required="false">
+                <caption>Extra</caption>
+                <description>Customize rendering of the top right corner of each panel</description>
+            </property>
+            <property key="forceRender" type="boolean" defaultValue="false">
+                <caption>ForceRender</caption>
+                <description>Whether to render DOM structures when hidden</description>
+            </property>
+            <property key="header" type="widgets" required="true">
+                <caption>Header</caption>
+                <description>Panel header content</description>
+            </property>
+            <property key="showArrow" type="boolean" defaultValue="true">
+                <caption>ShowArrow</caption>
+                <description>Whether to display the arrows on the current panel</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,11 @@
+/*
+Place your custom CSS here
+*/
+
+.rating-collapse+span {
+    margin-left: 8px;
+}
+
+.syy-collapse.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow {
+    padding: 0;
+}
