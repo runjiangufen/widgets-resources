@@ -45,6 +45,15 @@ const assetsDirName = "assets";
 const absoluteOutAssetsDir = join(absoluteOutPackageDir, assetsDirName);
 const outAssetsDir = join(outWidgetDir, assetsDirName);
 
+function getWidgetName(path = "") {
+    const name = path.match(/.*\\(\w*)/)[1];
+    const dirPath = join(widgetPackage.replace(/\./g, "/"), name.toLowerCase());
+
+    return {
+        dirPath,
+        filePath: join(dirPath, `${name}`)
+    };
+}
 /**
  * This function is used by postcss-url.
  * Its main purpose to "adjust" asset path so that
@@ -67,99 +76,117 @@ export default async args => {
     }
 
     const result = [];
-
-    ["amd", "es"].forEach(outputFormat => {
-        result.push({
-            input: widgetEntry,
-            output: {
-                format: outputFormat,
-                file: join(outDir, `${outWidgetFile}.${outputFormat === "es" ? "mjs" : "js"}`),
-                sourcemap: !production ? "inline" : false
-            },
-            external: webExternal,
-            plugins: [
-                ...getClientComponentPlugins(),
-                url({
-                    include: imagesAndFonts,
-                    limit: 0,
-                    publicPath: `${join("widgets", outAssetsDir)}/`, // Prefix for the actual import, relative to Mendix web server root
-                    destDir: absoluteOutAssetsDir
-                }),
-                postCssPlugin(outputFormat, production),
-                alias({
-                    entries: {
-                        "react-hot-loader/root": join(__dirname, "hot")
-                    }
-                }),
-                ...getCommonPlugins({
-                    sourceMaps: !production,
-                    extensions,
-                    transpile: production,
-                    babelConfig: {
-                        presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
-                        allowAllFormats: true
+    if (widgetEntry && widgetEntry.length > 0) {
+        widgetEntry.forEach(widget => {
+            if (!widget) {
+                return;
+            }
+            const widgetPaths = getWidgetName(widget);
+            ["amd", "es"].forEach(outputFormat => {
+                result.push({
+                    input: widget,
+                    output: {
+                        format: outputFormat,
+                        file: join(outDir, `${widgetPaths.filePath}.${outputFormat === "es" ? "mjs" : "js"}`),
+                        sourcemap: !production ? "inline" : false
                     },
                     external: webExternal,
-                    licenses: production && outputFormat === "amd"
-                })
-            ],
-            onwarn
+                    plugins: [
+                        ...getClientComponentPlugins(),
+                        url({
+                            include: imagesAndFonts,
+                            limit: 0,
+                            publicPath: `${join("widgets", outAssetsDir)}/`, // Prefix for the actual import, relative to Mendix web server root
+                            destDir: absoluteOutAssetsDir
+                        }),
+                        postCssPlugin(outputFormat, production),
+                        alias({
+                            entries: {
+                                "react-hot-loader/root": join(__dirname, "hot")
+                            }
+                        }),
+                        ...getCommonPlugins({
+                            sourceMaps: !production,
+                            extensions,
+                            transpile: production,
+                            babelConfig: {
+                                presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
+                                allowAllFormats: true
+                            },
+                            external: webExternal,
+                            licenses: production && outputFormat === "amd"
+                        })
+                    ],
+                    onwarn
+                });
+            });
         });
-    });
-
-    if (previewEntry) {
-        result.push({
-            input: previewEntry,
-            output: {
-                format: "commonjs",
-                file: join(outDir, `${widgetName}.editorPreview.js`),
-                sourcemap: !production ? "inline" : false
-            },
-            external: editorPreviewExternal,
-            plugins: [
-                postcss({
-                    extensions: [".css", ".sass", ".scss"],
-                    extract: false,
-                    inject: true,
-                    minimize: production,
-                    plugins: [postcssImport(), postcssUrl({ url: "inline" })],
-                    sourceMap: !production ? "inline" : false,
-                    use: ["sass"]
-                }),
-                ...getCommonPlugins({
-                    sourceMaps: !production,
-                    extensions,
-                    transpile: production,
-                    babelConfig: { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] },
-                    external: editorPreviewExternal
-                })
-            ],
-            onwarn
+    }
+    if (previewEntry && previewEntry.length > 0) {
+        previewEntry.forEach(widget => {
+            if (!widget) {
+                return;
+            }
+            const widgetPaths = getWidgetName(widget);
+            result.push({
+                input: widget,
+                output: {
+                    format: "commonjs",
+                    file: join(outDir, `${widgetPaths.filePath}.editorPreview.js`),
+                    sourcemap: !production ? "inline" : false
+                },
+                external: editorPreviewExternal,
+                plugins: [
+                    postcss({
+                        extensions: [".css", ".sass", ".scss"],
+                        extract: false,
+                        inject: true,
+                        minimize: production,
+                        plugins: [postcssImport(), postcssUrl({ url: "inline" })],
+                        sourceMap: !production ? "inline" : false,
+                        use: ["sass"]
+                    }),
+                    ...getCommonPlugins({
+                        sourceMaps: !production,
+                        extensions,
+                        transpile: production,
+                        babelConfig: { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] },
+                        external: editorPreviewExternal
+                    })
+                ],
+                onwarn
+            });
         });
     }
 
-    if (editorConfigEntry) {
-        // We target Studio Pro's JS engine that supports only es5 and no source maps
-        result.push({
-            input: editorConfigEntry,
-            output: {
-                format: "commonjs",
-                file: join(outDir, `${widgetName}.editorConfig.js`),
-                sourcemap: false
-            },
-            external: editorConfigExternal,
-            treeshake: { moduleSideEffects: false },
-            plugins: [
-                url({ include: ["**/*.svg"], limit: 143360 }), // SVG file size limit of 140 kB
-                ...getCommonPlugins({
-                    sourceMaps: false,
-                    extensions,
-                    transpile: true,
-                    babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] },
-                    external: editorConfigExternal
-                })
-            ],
-            onwarn
+    if (editorConfigEntry && editorConfigEntry.length > 0) {
+        editorConfigEntry.forEach(widget => {
+            if (!widget) {
+                return;
+            }
+            const widgetPaths = getWidgetName(widget);
+            // We target Studio Pro's JS engine that supports only es5 and no source maps
+            result.push({
+                input: widget,
+                output: {
+                    format: "commonjs",
+                    file: join(outDir, `${widgetPaths.filePath}.editorConfig.js`),
+                    sourcemap: false
+                },
+                external: editorConfigExternal,
+                treeshake: { moduleSideEffects: false },
+                plugins: [
+                    url({ include: ["**/*.svg"], limit: 143360 }), // SVG file size limit of 140 kB
+                    ...getCommonPlugins({
+                        sourceMaps: false,
+                        extensions,
+                        transpile: true,
+                        babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] },
+                        external: editorConfigExternal
+                    })
+                ],
+                onwarn
+            });
         });
     }
 
