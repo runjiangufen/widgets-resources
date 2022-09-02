@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SwitchWeb render default switch with false  1`] = `
+<button
+  aria-checked="false"
+  class="ant-switch"
+  role="switch"
+  type="button"
+>
+  <div
+    class="ant-switch-handle"
+  />
+  <span
+    class="ant-switch-inner"
+  />
+</button>
+`;
+
+exports[`SwitchWeb render default switch with true 1`] = `
+<button
+  aria-checked="true"
+  class="ant-switch ant-switch-checked"
+  role="switch"
+  type="button"
+>
+  <div
+    class="ant-switch-handle"
+  />
+  <span
+    class="ant-switch-inner"
+  />
+</button>
+`;
+
+exports[`SwitchWeb render switch disable 1`] = `
+<button
+  aria-checked="false"
+  class="ant-switch ant-switch-disabled"
+  disabled=""
+  role="switch"
+  type="button"
+>
+  <div
+    class="ant-switch-handle"
+  />
+  <span
+    class="ant-switch-inner"
+  />
+</button>
+`;
+
+exports[`SwitchWeb when checked is false and offName is setted renders with correct attributes 1`] = `
+<button
+  aria-checked="false"
+  class="ant-switch"
+  role="switch"
+  type="button"
+>
+  <div
+    class="ant-switch-handle"
+  />
+  <span
+    class="ant-switch-inner"
+  >
+    Off
+  </span>
+</button>
+`;
+
+exports[`SwitchWeb when checked is true and onName is setted renders with correct attributes 1`] = `
+<button
+  aria-checked="true"
+  class="ant-switch ant-switch-checked"
+  role="switch"
+  type="button"
+>
+  <div
+    class="ant-switch-handle"
+  />
+  <span
+    class="ant-switch-inner"
+  >
+    On
+  </span>
+</button>
+`;
+
+exports[`SwitchWeb when openconfirm and type is modal renders with correct attributes 1`] = `
+<div>
+  <button
+    aria-checked="false"
+    class="ant-switch"
+    role="switch"
+    type="button"
+  >
+    <div
+      class="ant-switch-handle"
+    />
+    <span
+      class="ant-switch-inner"
+    />
+  </button>
+</div>
+`;
+
+exports[`SwitchWeb when openconfirm and type is pop renders with correct attributes 1`] = `
+<div>
+  <button
+    aria-checked="false"
+    class="ant-switch"
+    role="switch"
+    type="button"
+  >
+    <div
+      class="ant-switch-handle"
+    />
+    <span
+      class="ant-switch-inner"
+    />
+  </button>
+</div>
+`;
+
+exports[`SwitchWeb when openconfirm and type is pop renders with correct attributes and title is show 1`] = `
+<div>
+  <button
+    aria-checked="false"
+    class="ant-switch"
+    role="switch"
+    type="button"
+  >
+    <div
+      class="ant-switch-handle"
+    />
+    <span
+      class="ant-switch-inner"
+    />
+  </button>
+</div>
+`;
