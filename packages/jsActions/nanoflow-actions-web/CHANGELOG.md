@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Breaking
+### Added
 
--   We added new actions: SetCookie, ReadCookie, SetFavicon, ScrollToClass.
+-   We added new actions: SetCookie, ReadCookie, SetFavicon.
 
 ## [2.3.0] - 2021-09-28
 

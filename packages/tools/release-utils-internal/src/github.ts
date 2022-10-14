@@ -1,5 +1,7 @@
 import { execShellCommand } from "./shell";
 import { fetch } from "./fetch";
+import { mkdtemp, writeFile } from "fs/promises";
+import { join } from "path";
 
 interface GitHubReleaseInfo {
     title: string;
@@ -49,15 +51,23 @@ export class GitHub {
     }: GitHubReleaseInfo): Promise<void> {
         await this.ensureAuth();
 
-        const draftArgument = isDraft ? "--draft" : "";
-        const repoArgument = repo ? `-R "${repo}"` : "";
-        const filesArgument = filesToRelease ? `"${filesToRelease}"` : "";
+        const notesFilePath = await this.createReleaseNotesFile(notes);
 
         const targetHash = (await execShellCommand(`git rev-parse --verify ${target}`)).trim();
+        const command = [
+            `gh release create`,
+            `--title '${title}'`,
+            `--notes-file '${notesFilePath}'`,
+            isDraft ? `--draft` : "",
+            repo ? `-R '${repo}'` : "",
+            `'${tag}'`,
+            `--target '${targetHash}'`,
+            filesToRelease ? `'${filesToRelease}'` : ""
+        ]
+            .filter(str => str !== "")
+            .join(" ");
 
-        await execShellCommand(
-            `gh release create --title "${title}" --notes "${notes}" ${draftArgument} ${repoArgument} "${tag}" --target ${targetHash}  ${filesArgument}`
-        );
+        await execShellCommand(command);
     }
 
     async getReleaseIdByReleaseTag(releaseTag: string): Promise<string | undefined> {
@@ -108,6 +118,14 @@ export class GitHub {
         }
 
         return downloadUrl;
+    }
+
+    async createReleaseNotesFile(releaseNotesText: string): Promise<string> {
+        const folderPath = await mkdtemp("gh-");
+        const filePath = join(folderPath, "release-notes.txt");
+        await writeFile(filePath, releaseNotesText);
+
+        return filePath;
     }
 }
 

@@ -9,7 +9,7 @@ on:
       - "data-widgets-v*"
       - "atlas-core-v*"
       - "atlas-web-*-v*"
-
+      - "web-actions-v*"
 jobs:
   publish_release:
     name: "Marketplace Release"
@@ -50,9 +50,23 @@ jobs:
       - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
         run: "npm run release:marketplace -- --scope '${{ steps.scope.outputs._0 }}'"
         env:
-          MARKETPLACE_API_KEY: ${{ secrets.MARKETPLACE_API_KEY }}
-          MARKETPLACE_USERNAME: ${{ secrets.MARKETPLACE_USERNAME }}
+          OPENID_URL: ${{ secrets.OPENID_URL }}
+          CPAPI_USERNAME: ${{ secrets.CPAPI_USERNAME }}
+          CPAPI_PASS_PROD: ${{ secrets.CPAPI_PASS_PROD }}
           TAG: ${{ steps.variables.outputs.tag }}
+      - name: "Send slack msg on failure"
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 # v2
+        env:
+          SLACK_CHANNEL: ${{ secrets.SLACK_MULTIXP_CHANNEL }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: ${{ secrets.WEBCONTENT_BOT_IMAGE }}
+          SLACK_MESSAGE: "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{ steps.scope.outputs._0 }} to the marketplace. <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|More info..>"
+          SLACK_TITLE: ":warning: *Automation Failed*"
+          SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_MULTIXP_WEBHOOK }}
+          SLACK_FOOTER: "Created by Aliens"
+          MSG_MINIMAL: true
       - name: "Send workweixin notifier on successful"
         uses: jerray/work-weixin-notifier@5341bd2e4ee6e2a2abe410f1a63ace0fdffb4384
         with:

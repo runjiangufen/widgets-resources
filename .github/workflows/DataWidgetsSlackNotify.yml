@@ -1,14 +1,14 @@
 name: DG Release Slack Notification
 
 on:
-    push:
-        tags:
-            - "data-widgets-v*"
+  push:
+    tags:
+      - "data-widgets-v*"
 
 jobs:
-    notify:
-        name: "Slack Notification"
-        runs-on: ubuntu-latest
-        steps:
-            - name: "Notifying Workflow Team on WorkWeiXin"
-              run: "echo hello world"
+  notify:
+    name: "Slack Notification"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Notifying Workflow Team on WorkWeiXin"
+        run: "echo hello world"
