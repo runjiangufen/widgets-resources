@@ -1,5 +1,5 @@
 import { createElement, Fragment, ReactElement, useCallback, useEffect, useState } from "react";
-import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
+import { ActivityIndicator, LayoutChangeEvent, Platform, Text, View } from "react-native";
 import { CarouselProps } from "../typings/CarouselProps";
 import { CarouselStyle, defaultCarouselStyle, LayoutStyle } from "./ui/styles";
 import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
@@ -70,18 +70,26 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
             );
         }
 
+        const { color: dotColor, ...dotStyles } = pagination.dotStyle || {};
+        const {
+            color: inActiveDotColor,
+            opacity: inActiveDotOpacity,
+            scale: inActiveDotScale,
+            ...inActiveDotStyles
+        } = pagination.inactiveDotStyle || {};
+
         return (
             <Pagination
                 dotsLength={contentLength}
                 activeDotIndex={activeSlide}
                 containerStyle={pagination.container}
                 dotContainerStyle={pagination.dotContainerStyle}
-                dotColor={pagination.dotStyle?.color}
-                dotStyle={pagination.dotStyle}
-                inactiveDotStyle={pagination.inactiveDotStyle}
-                inactiveDotColor={pagination.inactiveDotStyle?.color}
-                inactiveDotOpacity={pagination.inactiveDotStyle?.opacity}
-                inactiveDotScale={pagination.inactiveDotStyle?.scale}
+                dotColor={dotColor}
+                dotStyle={dotStyles}
+                inactiveDotStyle={inActiveDotStyles}
+                inactiveDotColor={inActiveDotColor}
+                inactiveDotOpacity={inActiveDotOpacity}
+                inactiveDotScale={inActiveDotScale}
                 carouselRef={carouselRef}
                 tappableDots
                 {...a11yProps}
@@ -154,6 +162,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
                             inactiveSlideOpacity={layoutSpecificStyle.inactiveSlideItem?.opacity}
                             onSnapToItem={onSnap}
                             ref={(r: any) => setCarouselRef(r)}
+                            enableMomentum={Platform.OS === "android"}
+                            decelerationRate={0.9}
                         />
                         {renderPagination()}
                     </Fragment>

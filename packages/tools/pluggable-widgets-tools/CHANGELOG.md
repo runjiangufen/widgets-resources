@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.17.0] - 2022-09-02
+
+### Added
+
+-   We added support for association properties linked to a data source, introduced in Mendix 9.17.
+
+### Breaking changes
+
+-   We removed `webdriverio` from our dependencies as we're using Cypress for e2e testing purposes. In case if you want to continue using WebDriverIO, please install the dependencies manually.
+
+## [9.13.4] - 2022-08-26
+
+### Changed
+
+-   We updated `cypress` to version 10.
+
+### Fixed
+
+-   We fixed an issue which caused CSS URL transforms to include paths with backslashes when running on Windows.
+
 ## [9.13.3] - 2022-08-15
 
 ### Added

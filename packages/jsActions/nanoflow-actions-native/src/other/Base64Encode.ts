@@ -5,14 +5,14 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
-import Base64 from "js-base64";
+import { Base64 } from "js-base64";
 
 /**
- * @param {string} inputString
+ * @param {string} string
  * @returns {Promise.<string>}
  */
-export async function Base64Encode(inputString: string): Promise<string> {
+export async function Base64Encode(string: string): Promise<string> {
     // BEGIN USER CODE
-    return Base64.encode(inputString);
+    return Base64.encode(string);
     // END USER CODE
 }

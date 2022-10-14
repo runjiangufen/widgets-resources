@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.1] - 2022-9-20
+
+### Removed
+
+-   We removed animated GIFs from the README file.
+
 ## [2.1.0] - 2022-01-24
 
 ### Added

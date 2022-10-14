@@ -1,0 +1,38 @@
+.navbar-brand {
+    .widget-language-selector {
+        .current-language-text,
+        .language-arrow {
+            color: white;
+            img {
+                filter: invert(1);
+            }
+        }
+    }
+}
+
+.widget-language-selector {
+    .language-arrow {
+        transition: transform 0.2s ease-in-out 50ms;
+        img {
+            height: 14px !important;
+            &.arrow-up {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .current-language-text {
+        margin-right: 6px;
+        font-size: 14px;
+    }
+    .popupmenu-menu {
+        background: #f8f8f8;
+        .popupmenu-basic-item {
+            &.active {
+                font-weight: 600;
+            }
+            &:hover {
+                background: #ffffff;
+            }
+        }
+    }
+}

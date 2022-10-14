@@ -6,9 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.6.1] Nanoflow Commons - 2022-9-23
+
+### Fixed
+
+-   We fixed issue with Base64 actions throwing error
+
+## [2.6.0] Nanoflow Commons - 2022-8-31
+
 ### Breaking
 
--   We removed next actions: SetCookie, ReadCookie, SetFavicon, ScrollToClass.
+-   We removed next actions:
+    -   SetCookie (will be available in Web Actions module)
+    -   ReadCookie (will be available in Web Actions module)
+    -   SetFavicon (will be available in Web Actions module)
+    -   ScrollToClass
+    -   AddMilliseconds
+    -   AddTime
+-   "Is connected" action is renamed to "Is connected to server"
+-   Parameter names are changed for next actions:
+    -   Base64Decode
+    -   Base64DecodeToImage
+    -   Base64Encode
+    -   GetStraightLineDistance
+-   New "Enum_DistanceUnit" enum is introduce for GetStraightLineDistance action
 
 ## [2.5.0] Nanoflow Commons - 2022-7-25
 

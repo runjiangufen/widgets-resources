@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.2] - 2022-10-5
+
+### Fixed
+
+-   We have fixed layout issue with the landscape mode and ipad devices
+
 ## [3.2.1] - 2022-03-28
 
 ### Changed
