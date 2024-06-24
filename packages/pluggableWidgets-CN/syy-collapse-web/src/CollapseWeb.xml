@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="runjian.collapseweb.CollapseWeb" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>SYY Collapse Web</name>
+    <description>A content area that can be collapsed/expanded.</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="children" type="widgets" required="false">
+                <caption>Children</caption>
+                <description>Children</description>
+            </property>
+            <property key="accordion" type="boolean" defaultValue="false">
+                <caption>Accordion</caption>
+                <description>Accordion mode</description>
+            </property>
+            <property key="bordered" type="boolean" defaultValue="true">
+                <caption>Bordered</caption>
+                <description>Folding panel with border style</description>
+            </property>
+            <!-- <property key="defaultActiveKey" type="boolean" required="false">
+                <caption>DefaultActiveKey</caption>
+                <description>Initializes the key of the selected panel</description>
+                <attributeTypes>
+                    <attributeType></attributeType>                
+                </attributeTypes>
+            </property> -->
+            <property key="collapsible" type="enumeration" defaultValue="header" required="true">
+                <caption>Collapsible</caption>
+                <description>Whether all subpanels are collapsible or specify collapsible trigger areas</description>
+                <enumerationValues>
+                    <enumerationValue key="header">header</enumerationValue>
+                    <enumerationValue key="disabled">disabled</enumerationValue>
+                </enumerationValues>
+            </property>
+            <!-- <property key="expandIcon" type="icon" required="false">
+                <caption>expandIcon</caption>
+                <description>设置按钮的图标- 暂时不支持</description>
+            </property> -->
+            <property key="expandIconPosition" type="enumeration" defaultValue="start">
+                <caption>ExpandIconPosition</caption>
+                <description>Setting icon location</description>
+                <enumerationValues>
+                    <enumerationValue key="start">start</enumerationValue>
+                    <enumerationValue key="end">end</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="ghost" type="boolean" defaultValue="false">
+                <caption>Ghost</caption>
+                <description>Make the folded panel transparent and bezel-free</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChangeAction" type="action">
+                <caption>OnChange</caption>
+                <description>Callbacks when clicking on the panel</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
